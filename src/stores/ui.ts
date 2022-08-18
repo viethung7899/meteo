@@ -9,3 +9,4 @@ export const backgroundColor = derived(
     return `rgb(${red}, ${green}, ${blue})`;
   });
 export const isDark = derived(backgroundColor, $bg => tinycolor($bg).isDark());
+export const region = derived(isDark, $isDark => $isDark ? 'bg-white' : 'bg-black');

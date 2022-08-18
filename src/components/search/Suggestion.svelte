@@ -3,6 +3,7 @@
 
   import { onDestroy } from 'svelte';
   import { location } from '../../stores/location';
+  import {isDark} from '../../stores/ui';
 
   let timer;
   export let query: string;
@@ -19,23 +20,26 @@
   onDestroy(() => {
     clearTimeout(timer);
   });
+
+  $: bg = $isDark ? 'bg-black' : 'bg-white';
+  $: hoverBg = $isDark ? 'hover:bg-white' : 'hover:bg-black'
 </script>
 
 {#if promise && focus}
   {#await promise}
     <!-- Loading -->
-    <div class="suggestion flex items-center justify-center">
+    <div class="suggestion flex items-center justify-center {bg}">
       <i class="fa-solid fa-spinner py-5 w-8 h-8 fa-spin-pulse" />
     </div>
   {:then cities}
     <!-- Render suggestions -->
     {#if cities}
       {#if cities.length > 0}
-        <div class="suggestion py-4 text-lg space-y-2">
+        <div class="suggestion py-4 text-lg space-y-2 {bg}">
           {#each cities as city}
             {@const cityString = `${city.city}, ${city.region}, ${city.country}`}
             <div
-              class="px-4 py-2 hover:bg-white hover:bg-opacity-10 cursor-pointer"
+              class="px-4 py-2 {hoverBg} hover:bg-opacity-10 cursor-pointer"
               on:click={() => {
                 location.set({
                   name: cityString,
@@ -50,7 +54,7 @@
           {/each}
         </div>
       {:else}
-        <div class="suggestion p-4 text-xl italic">
+        <div class="suggestion p-4 text-xl italic {bg}">
           <i class="fa-solid fa-triangle-exclamation mr-2" />
           No city found
         </div>
@@ -58,7 +62,7 @@
     {/if}
   {:catch _error}
     <div class="suggestion p-4 text-xl">
-      <i class="fa-solid fa-triangle-exclamation mr-2" />
+      <i class="fa-solid fa-triangle-exclamation mr-2 {bg}" />
       An error has occurred
     </div>
   {/await}
@@ -66,6 +70,6 @@
 
 <style>
   .suggestion {
-    @apply absolute top-full bg-black bg-opacity-50 mt-0.5 rounded-md w-full backdrop-blur-sm;
+    @apply absolute top-full bg-opacity-50 mt-0.5 rounded-md w-full backdrop-blur-sm;
   }
 </style>
