@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { isDark } from '../../util/store';
-import Suggestion from './Suggestion.svelte';
+  import { isDark } from '../../stores/ui';
+  import Suggestion from './Suggestion.svelte';
 
   $: ringColor = $isDark ? 'ring-white' : 'ring-black';
   $: placeHolder = $isDark
@@ -9,28 +9,23 @@ import Suggestion from './Suggestion.svelte';
 
   // Input states
   let value = ''; // Input value
-  let query = ''; // Query state (delayed)
-  let timer;
-  const debounce = () => {
-    clearTimeout(timer);
-    timer = setTimeout(() => {
-      query = value;
-    }, 1000);
-  };
 
   // Focus state
-  let isFocused = false;
+  let focus = false;
 
-  // Finish searching
-  const onFinish = (result: string) => {
-    console.log(result);
-    value = result;
-  }
+  // Click outside
+  let container: HTMLFormElement;
+  const clickOutside = (event) => {
+    if (!container.contains(event.target)) focus = false;
+  };
 </script>
 
+<svelte:window on:click={clickOutside} />
+
 <div class="flex items-center w-full px-5 max-w-xl">
-  <div
+  <form
     class="relative flex flex-1 items-center opacity-60 focus-within:opacity-100"
+    bind:this={container}
   >
     <i class="fa-solid fa-magnifying-glass absolute pl-3 w-5 h-5" />
     <input
@@ -40,15 +35,13 @@ import Suggestion from './Suggestion.svelte';
       autocomplete="off"
       aria-label="Search city"
       bind:value
-      on:keyup={debounce}
-      on:focus={() => isFocused = true}
-      on:blur={() => isFocused = false}
+      on:focus={() => {
+        focus = true;
+      }}
     />
     <!-- Search suggestion -->
-    {#if query}
-      <Suggestion {query} {onFinish} />
-    {/if}
-  </div>
+    <Suggestion query={value} {focus} afterClick={() => (focus = false)} />
+  </form>
   <button
     class="ml-2 p-2 flex items-center justify-center hover:bg-black hover:bg-opacity-20 rounded-full"
   >

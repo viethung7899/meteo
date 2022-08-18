@@ -3,7 +3,7 @@
   import Main from './components/Main.svelte';
   import Nav from './components/Nav.svelte';
   import './global.scss';
-  import { backgroundColor, isDark } from './util/store';
+  import { backgroundColor, isDark } from './stores/ui';
   $: textColor = $isDark ? 'text-white' : 'text-black';
 </script>
 
