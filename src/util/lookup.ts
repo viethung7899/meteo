@@ -61,6 +61,6 @@ export const weatherIcons: WeatherConditionTable = {
 }
 
 export const getIcon = (code: number, day = true) => {
-  if (!(code in weatherIcons)) return "unknown";
+  if (!(code in weatherIcons)) return "na";
   return day ? weatherIcons[code][0] : weatherIcons[code][1];
 }
