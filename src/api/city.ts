@@ -24,5 +24,5 @@ export const findCities = (query: string, limit = 5) => {
       sort: '-population',
       types: 'CITY'
     }
-  })
+  }).then(response => response.data.data);
 };

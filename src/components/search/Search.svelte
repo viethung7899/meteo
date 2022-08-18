@@ -7,15 +7,25 @@ import Suggestion from './Suggestion.svelte';
     ? 'placeholder:text-white'
     : 'placeholder:text-black';
 
-  let query = '';
+  // Input states
+  let value = ''; // Input value
+  let query = ''; // Query state (delayed)
   let timer;
-
-  const debounce = (value: string) => {
+  const debounce = () => {
     clearTimeout(timer);
     timer = setTimeout(() => {
       query = value;
     }, 1000);
   };
+
+  // Focus state
+  let isFocused = false;
+
+  // Finish searching
+  const onFinish = (result: string) => {
+    console.log(result);
+    value = result;
+  }
 </script>
 
 <div class="flex items-center w-full px-5 max-w-xl">
@@ -29,11 +39,14 @@ import Suggestion from './Suggestion.svelte';
       placeholder="Search for a city..."
       autocomplete="off"
       aria-label="Search city"
-      on:keyup={(e) => debounce(e.currentTarget.value)}
+      bind:value
+      on:keyup={debounce}
+      on:focus={() => isFocused = true}
+      on:blur={() => isFocused = false}
     />
     <!-- Search suggestion -->
     {#if query}
-      <Suggestion query={query} />
+      <Suggestion {query} {onFinish} />
     {/if}
   </div>
   <button
