@@ -7,7 +7,6 @@
   let timer;
   export let query: string;
   export let focus = true;
-  export let afterClick: () => void;
   // Delayed promise
   let promise: Promise<City[]> = null;
   $: {
@@ -43,7 +42,7 @@
                   latitude: city.latitude,
                   longitude: city.longitude,
                 });
-                afterClick();
+                focus = false;
               }}
             >
               {cityString}

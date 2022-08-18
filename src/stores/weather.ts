@@ -1,13 +1,7 @@
-import { writable } from "svelte/store";
+import { sampleReport } from "../api/weather";
+import { readable, writable } from "svelte/store";
+import type { Unit } from "src/util/temp";
 
-const createWeather = () => {
-	const { subscribe, update } = writable(30);
-
-	return {
-		subscribe,
-		increment: () => update(n => n + 5),
-		decrement: () => update(n => n - 5)
-	};
-}
-
-export const weather = createWeather();
+export const currentWeather = readable(sampleReport);
+export const weather = writable(30);
+export const unit = writable<Unit>("metric");

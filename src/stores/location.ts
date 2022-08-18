@@ -6,4 +6,8 @@ type Location = {
 	latitude: number
 }
 
-export const location = writable<Location>();
+export const location = writable<Location>({
+	name: "",
+	longitude: 0,
+	latitude: 0
+});

@@ -1,6 +1,6 @@
 import { derived } from "svelte/store";
 import tinycolor from "tinycolor2";
-import { getTempColor } from "../util/colorTemp";
+import { getTempColor } from "../util/color";
 import { weather } from "./weather";
 
 const rgb = derived(weather, $weather => getTempColor($weather));

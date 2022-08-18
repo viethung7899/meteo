@@ -12,37 +12,32 @@ export type City = {
 
 const fakeCities: City[] = [
   {
-    latitude: 0,
-    longitude: 0,
-    city: "A",
-    region: "A",
-    country: "A"
+    latitude: 49.2494,
+    longitude: -122.98,
+    city: "Metro Vancouver",
+    region: "BC",
+    country: "Canada"
   },
   {
-    latitude: 0,
-    longitude: 0,
-    city: "B",
-    region: "B",
-    country: "B"
-  },
-  {
-    latitude: 0,
-    longitude: 0,
-    city: "C",
-    region: "C",
-    country: "C"
+    latitude: 45.631111111,
+    longitude: -122.671666666,
+    city: "Vancouver",
+    region: "WA",
+    country: "USA"
   }
 ]
 
-export const findCities = (query: string, limit = 5) => {
-  return axios.get<{ data: City[] }>('https://wft-geo-db.p.rapidapi.com/v1/geo/cities', {
+export const findCities = async (query: string, limit = 5) => {
+  const trim = query.trim();
+  if (trim.length <= 0) return null;
+  return await axios.get<{ data: City[] }>('https://wft-geo-db.p.rapidapi.com/v1/geo/cities', {
     headers: {
       'X-RapidAPI-Key': RAPID_API_KEY,
       'X-RapidAPI-Host': 'wft-geo-db.p.rapidapi.com'
     },
     params: {
       limit,
-      namePrefix: query,
+      namePrefix: trim,
       sort: '-population',
       types: 'CITY'
     }

@@ -22,7 +22,7 @@
 
 <svelte:window on:click={clickOutside} />
 
-<div class="flex items-center w-full px-5 max-w-xl">
+<div class="flex items-center">
   <form
     class="relative flex flex-1 items-center opacity-60 focus-within:opacity-100"
     bind:this={container}
@@ -40,7 +40,7 @@
       }}
     />
     <!-- Search suggestion -->
-    <Suggestion query={value} {focus} afterClick={() => (focus = false)} />
+    <Suggestion query={value} bind:focus />
   </form>
   <button
     class="ml-2 p-2 flex items-center justify-center hover:bg-black hover:bg-opacity-20 rounded-full"
