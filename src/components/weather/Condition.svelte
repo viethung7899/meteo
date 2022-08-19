@@ -6,7 +6,7 @@ import { convertFromKelvin } from '../../util/temp';
   import { getIcon } from '../../util/lookup';
 
   $: condition = $now.weather[0];
-  $: imageName = getIcon(condition.id, condition.icon.slice(-1) === 'd');
+  $: imageName = getIcon(condition.id, condition.icon);
 </script>
 
 <div class="flex flex-row items-center">

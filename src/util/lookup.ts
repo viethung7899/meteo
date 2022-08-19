@@ -2,7 +2,7 @@ type WeatherConditionTable = {
   [key: number]: [string, string]
 }
 
-export const weatherIcons: WeatherConditionTable = {
+const weatherIcons: WeatherConditionTable = {
   200: ["20", "20"],
   201: ["20", "20"],
   202: ["20", "20"],
@@ -60,7 +60,8 @@ export const weatherIcons: WeatherConditionTable = {
   804: ["803", "803"]
 }
 
-export const getIcon = (code: number, day = true) => {
+export const getIcon = (code: number, icon?: string) => {
   if (!(code in weatherIcons)) return "na";
-  return day ? weatherIcons[code][0] : weatherIcons[code][1];
+  if (icon?.slice(-1) === "n") return weatherIcons[code][1];
+  return weatherIcons[code][0];
 }
