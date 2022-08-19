@@ -8,7 +8,7 @@
 </script>
 
 <div
-  class="app flex flex-col {textColor} w-screen h-screen mx-auto flex flex-col items-center"
+  class="app flex flex-col {textColor} w-screen h-min-screen mx-auto flex flex-col items-center"
   style:background-color={$backgroundColor}
 >
   <Nav />

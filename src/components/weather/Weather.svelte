@@ -1,9 +1,26 @@
 <script lang="ts">
-  import { location } from '../../stores/location';
-  import Current from './Current.svelte';
+  import { getCurrentWeather } from '../../api/weather';
+  import { city, getFullName } from '../../stores/city';
+  import CurrentWeather from './CurrentWeather.svelte';
+
+  $: currentWeather = async () => {
+    if ($city) return getCurrentWeather($city);
+    else return null;
+  };
 </script>
 
 <div class="mt-5">
-  <div class="text-3xl lg:text-4xl font-bold">{$location.name}</div>
-  <Current />
+  {#if $city}
+    <div class="text-3xl lg:text-4xl font-bold">{getFullName($city)}</div>
+  {/if}
+  <!-- Current weather -->
+  {#await currentWeather()}
+    <div>Loading...</div>
+  {:then report}
+    {#if report}
+      <CurrentWeather {report} />
+    {/if}
+  {:catch}
+    <div>Error</div>
+  {/await}
 </div>

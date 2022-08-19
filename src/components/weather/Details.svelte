@@ -1,15 +1,21 @@
-<script>
-  import { convertFromKelvin } from '../../util/temp';
+<script lang="ts">
+  import type { WeatherReport } from '../../api/weather';
   import { region } from '../../stores/ui';
-  import { currentWeather as now, unit } from '../../stores/weather';
+  import { unit } from '../../stores/weather';
+  import { convertTemperature } from '../../util/temp';
+
+  export let report: WeatherReport;
 
   $: wind =
     $unit === 'metric'
-      ? `${Math.round($now.wind.speed * 3.6)} km/h`
-      : `${Math.round($now.wind.speed * 2.237)} mph`;
+      ? `${Math.round(report.wind.speed * 3.6)} km/h`
+      : `${Math.round(report.wind.speed * 2.237)} mph`;
 
-  $: feelsLike = Math.round(convertFromKelvin($now.main.feels_like, $unit));
-  $: visibility = $unit === "metric" ? `${Math.round($now.visibility / 1000)} km` : `${Math.round($now.visibility / 1600)} miles`
+  $: feelsLike = Math.round(convertTemperature(report.main.feels_like, $unit));
+  $: visibility =
+    $unit === 'metric'
+      ? `${Math.round(report.visibility / 1000)} km`
+      : `${Math.round(report.visibility / 1600)} miles`;
 </script>
 
 <div
@@ -21,13 +27,13 @@
       {wind}
       <span
         class="aspect-square fa-solid fa-long-arrow-up"
-        style="transform: rotate({$now.wind.deg}deg)"
+        style="transform: rotate({report.wind.deg}deg)"
       />
     </div>
   </div>
   <div class="detail">
     <div class="title"><i class="fa-solid fa-droplet mr-2" />Humidity</div>
-    <div class="value">{$now.main.humidity} &#37;</div>
+    <div class="value">{report.main.humidity} &#37;</div>
   </div>
   <div class="detail">
     <div class="title">

@@ -2,8 +2,8 @@
   import { getFakeCities, type City } from '../../api/city';
 
   import { onDestroy } from 'svelte';
-  import { location } from '../../stores/location';
-  import {isDark} from '../../stores/ui';
+  import { city, getFullName } from '../../stores/city';
+  import { isDark } from '../../stores/ui';
 
   let timer;
   export let query: string;
@@ -22,7 +22,7 @@
   });
 
   $: bg = $isDark ? 'bg-black' : 'bg-white';
-  $: hoverBg = $isDark ? 'hover:bg-white' : 'hover:bg-black'
+  $: hoverBg = $isDark ? 'hover:bg-white' : 'hover:bg-black';
 </script>
 
 {#if promise && focus}
@@ -36,20 +36,15 @@
     {#if cities}
       {#if cities.length > 0}
         <div class="suggestion py-4 text-lg space-y-2 {bg}">
-          {#each cities as city}
-            {@const cityString = `${city.city}, ${city.region}, ${city.country}`}
+          {#each cities as c}
             <div
               class="px-4 py-2 {hoverBg} hover:bg-opacity-10 cursor-pointer"
               on:click={() => {
-                location.set({
-                  name: cityString,
-                  latitude: city.latitude,
-                  longitude: city.longitude,
-                });
+                city.set(c);
                 focus = false;
               }}
             >
-              {cityString}
+              {getFullName(c)}
             </div>
           {/each}
         </div>
