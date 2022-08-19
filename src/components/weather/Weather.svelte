@@ -1,12 +1,17 @@
 <script lang="ts">
+  import { convertTemperature } from '../../util/temp';
+
   import { getCurrentWeather } from '../../api/weather';
   import { city, getFullName } from '../../stores/city';
-  import { region } from '../../stores/setting';
+  import { region, temperature } from '../../stores/setting';
   import CurrentWeather from './CurrentWeather.svelte';
 
   $: currentWeather = async () => {
-    if ($city) return getCurrentWeather($city);
-    else return null;
+    if ($city) {
+      const data = await getCurrentWeather($city);
+      temperature.set(convertTemperature(data.main.temp, 'imperial'));
+      return data;
+    } else return null;
   };
 </script>
 

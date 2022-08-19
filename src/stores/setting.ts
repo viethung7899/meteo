@@ -4,8 +4,8 @@ import tinycolor from "tinycolor2";
 import { getTempColor } from "../util/color";
 
 export const unit = writable<Unit>("metric");
-export const weather = writable(32);
-const rgb = derived(weather, $weather => getTempColor($weather));
+export const temperature = writable(32);
+const rgb = derived(temperature, $temperature => getTempColor($temperature));
 export const backgroundColor = derived(
   rgb, ([red, green, blue]) => {
     return `rgb(${red}, ${green}, ${blue})`;
