@@ -18,7 +18,8 @@ export type WeatherReport = {
   wind: {
     speed: number;
     deg: number;
-  }
+  },
+  visibility: number;
 }
 
 export const sampleReport: WeatherReport = {
@@ -41,4 +42,5 @@ export const sampleReport: WeatherReport = {
     speed: 7.22,
     deg: 318
   },
+  visibility: 10000,
 }

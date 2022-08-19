@@ -18,6 +18,6 @@ import { convertFromKelvin } from '../../util/temp';
   />
   <div>
     <div class="text-8xl">{convertFromKelvin($now.main.temp, $unit)}&deg;</div>
-    <div>{condition.main}</div>
+    <div class="text-2xl font-medium">{condition.main}</div>
   </div>
 </div>
