@@ -1,6 +1,5 @@
 <script>
-  import { isDark } from '../../stores/ui';
-  import { unit } from '../../stores/weather';
+  import { isDark, unit } from '../../stores/setting';
 
   $: chosen = $isDark ? 'chosen-dark' : 'chosen-light';
   $: toggle = () =>

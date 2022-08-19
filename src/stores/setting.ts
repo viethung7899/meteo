@@ -1,8 +1,10 @@
-import { derived } from "svelte/store";
+import type { Unit } from "src/util/temp";
+import { derived, writable } from "svelte/store";
 import tinycolor from "tinycolor2";
 import { getTempColor } from "../util/color";
-import { weather } from "./weather";
 
+export const unit = writable<Unit>("metric");
+export const weather = writable(32);
 const rgb = derived(weather, $weather => getTempColor($weather));
 export const backgroundColor = derived(
   rgb, ([red, green, blue]) => {

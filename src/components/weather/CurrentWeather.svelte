@@ -1,7 +1,6 @@
 <script lang="ts">
   import type { WeatherReport } from '../../api/weather';
-  import { region } from '../../stores/ui';
-  import { unit } from '../../stores/weather';
+  import { region, unit } from '../../stores/setting';
   import { convertTemperature } from '../../util/temp';
   import Condition from './Condition.svelte';
   import Details from './Details.svelte';

@@ -1,6 +1,7 @@
 <script lang="ts">
   import { getCurrentWeather } from '../../api/weather';
   import { city, getFullName } from '../../stores/city';
+  import { region } from '../../stores/setting';
   import CurrentWeather from './CurrentWeather.svelte';
 
   $: currentWeather = async () => {
@@ -15,12 +16,15 @@
   {/if}
   <!-- Current weather -->
   {#await currentWeather()}
-    <div>Loading...</div>
+    <div class="text-xl w-full text-center py-4 fa-fade">Loading...</div>
   {:then report}
     {#if report}
       <CurrentWeather {report} />
     {/if}
   {:catch}
-    <div>Error</div>
+    <div class="{$region} bg-opacity-20 w-full p-4 text-xl">
+      <i class="fa-solid fa-triangle-exclamation mr-2" />
+      Cannot fetch weather data
+    </div>
   {/await}
 </div>

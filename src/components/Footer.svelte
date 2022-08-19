@@ -1,5 +1,5 @@
 <script>
-  import {region} from "../stores/ui";
+  import {region} from "../stores/setting";
 </script>
 
 

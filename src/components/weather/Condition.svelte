@@ -1,7 +1,6 @@
 <script lang="ts">
   import type { WeatherReport } from '../../api/weather';
-  import { isDark } from '../../stores/ui';
-  import { unit } from '../../stores/weather';
+  import { isDark, unit } from '../../stores/setting';
   import { getIcon } from '../../util/lookup';
   import { convertTemperature } from '../../util/temp';
   export let report: WeatherReport;
