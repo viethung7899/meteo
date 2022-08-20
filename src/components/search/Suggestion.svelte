@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getFakeCities, type City } from '@api/city';
+  import { findCities, type City } from '@api/city';
 
   import { city, getFullName } from '@stores/city';
   import { isDark } from '@stores/setting';
@@ -13,7 +13,7 @@
   $: {
     clearTimeout(timer);
     timer = setTimeout(() => {
-      promise = getFakeCities(query);
+      promise = findCities(query);
     }, 1000);
   }
 
