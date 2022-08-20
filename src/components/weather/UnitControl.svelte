@@ -1,5 +1,5 @@
 <script>
-  import { isDark, unit } from '../../stores/setting';
+  import { isDark, unit } from '@stores/setting';
 
   $: chosen = $isDark ? 'chosen-dark' : 'chosen-light';
   $: toggle = () =>

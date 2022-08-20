@@ -25,31 +25,42 @@ export type WeatherReport = {
   visibility: number;
 }
 
-export const sampleReport: WeatherReport = {
-  weather: [
-    {
-      id: 804,
-      main: "Clouds",
-      description: "overcast clouds",
-      icon: "04n"
-    }
-  ],
-  main: {
-    temp: 290.82,
-    feels_like: 290.84,
-    temp_min: 290.82,
-    temp_max: 290.82,
-    humidity: 84,
-  },
-  wind: {
-    speed: 7.22,
-    deg: 318
-  },
-  visibility: 10000,
-}
-
 export const getCurrentWeather = async (city: City) => {
   return axios.get<WeatherReport>('https://api.openweathermap.org/data/2.5/weather', {
+    params: {
+      lat: city.latitude,
+      lon: city.longitude,
+      units: 'metric',
+      appid: import.meta.env.VITE_WEATHER_API_KEY
+    }
+  }).then(response => response.data);
+}
+
+type TimeWeatherReport = WeatherReport & { dt: number };
+
+type WeatherForecast = {
+  list: TimeWeatherReport[];
+  timezone: number;
+  sunrise: number;
+  sunset: number;
+}
+
+const getHourForecast = (forecast: WeatherForecast) => {
+  return forecast.list.slice(0, 8).map(({dt, main, weather}) => {
+    return {
+      dt,
+      temp: main.temp,
+      weather
+    }
+  });
+};
+
+const getDailyForcast = (forecast: WeatherForecast) => {
+
+};
+
+export const getWeatherForecast = async (city: City) => {
+  return axios.get<WeatherForecast>('https://api.openweathermap.org/data/2.5/forecast', {
     params: {
       lat: city.latitude,
       lon: city.longitude,

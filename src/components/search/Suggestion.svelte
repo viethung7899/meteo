@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { getFakeCities, type City } from '../../api/city';
+  import { getFakeCities, type City } from '@api/city';
 
+  import { city, getFullName } from '@stores/city';
+  import { isDark } from '@stores/setting';
   import { onDestroy } from 'svelte';
-  import { city, getFullName } from '../../stores/city';
-  import { isDark } from '../../stores/setting';
 
   let timer;
   export let query: string;

@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { convertTemperature } from '../../util/weather';
+  import { convertTemperature } from '@utils/weather';
 
-  import { getCurrentWeather } from '../../api/weather';
-  import { city, getFullName } from '../../stores/city';
-  import { region, temperature } from '../../stores/setting';
-  import CurrentWeather from './CurrentWeather.svelte';
+  import { getCurrentWeather } from '@api/weather';
+  import { city, getFullName } from '@stores/city';
+  import { region, temperature } from '@stores/setting';
+  import CurrentWeather from './current/CurrentWeather.svelte';
 
   $: currentWeather = async () => {
     if ($city) {

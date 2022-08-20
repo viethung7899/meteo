@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { isDark } from '../../stores/setting';
+  import { isDark } from '@stores/setting';
   import Suggestion from './Suggestion.svelte';
 
   $: ringColor = $isDark ? 'ring-white' : 'ring-black';

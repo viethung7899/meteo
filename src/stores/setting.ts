@@ -1,7 +1,7 @@
-import type { Unit } from "src/util/weather";
+import type { Unit } from "@utils/weather";
 import { derived, writable } from "svelte/store";
 import tinycolor from "tinycolor2";
-import { getTempColor } from "../util/color";
+import { getTempColor } from "../utils/color";
 
 export const unit = writable<Unit>("metric");
 export const temperature = writable(32);
