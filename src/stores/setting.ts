@@ -1,4 +1,4 @@
-import type { Unit } from "src/util/temp";
+import type { Unit } from "src/util/weather";
 import { derived, writable } from "svelte/store";
 import tinycolor from "tinycolor2";
 import { getTempColor } from "../util/color";

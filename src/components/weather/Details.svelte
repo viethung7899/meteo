@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { WeatherReport } from '../../api/weather';
   import { region, unit } from '../../stores/setting';
-  import { convertTemperature } from '../../util/temp';
+  import { convertTemperature } from '../../util/weather';
 
   export let report: WeatherReport;
 
@@ -25,7 +25,7 @@
     <div class="value">
       <span
       class="aspect-square fa-solid fa-long-arrow-up"
-      style="transform: rotate({report.wind.deg}deg)"
+      style="transform: rotate({report.wind.deg + 180}deg)"
       />
       {wind}
     </div>

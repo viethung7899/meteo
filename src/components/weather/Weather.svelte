@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { convertTemperature } from '../../util/temp';
+  import { convertTemperature } from '../../util/weather';
 
   import { getCurrentWeather } from '../../api/weather';
   import { city, getFullName } from '../../stores/city';

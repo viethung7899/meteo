@@ -2,7 +2,7 @@
   import type { WeatherReport } from '../../api/weather';
   import { isDark, unit } from '../../stores/setting';
   import { getIcon } from '../../util/lookup';
-  import { convertTemperature } from '../../util/temp';
+  import { convertTemperature } from '../../util/weather';
   export let report: WeatherReport;
   $: condition = report.weather[0];
   $: imageName = getIcon(condition.id, condition.icon);
