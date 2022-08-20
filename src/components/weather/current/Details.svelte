@@ -7,8 +7,8 @@
 
   $: wind =
     $unit === 'metric'
-      ? `${Math.round(report.wind.speed * 3.6)} km/h`
-      : `${Math.round(report.wind.speed * 2.237)} mph`;
+      ? `${Math.round(report.wind.speed)} km/h`
+      : `${Math.round(report.wind.speed / 1.6)} mph`;
 
   $: feelsLike = Math.round(convertTemperature(report.main.feels_like, $unit));
   $: visibility =

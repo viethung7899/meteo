@@ -1,7 +1,7 @@
 import axios from "axios";
 import type { City } from "./city";
 
-type Weather = {
+export type Weather = {
   id: number;
   main: string;
   description: string;
@@ -25,11 +25,11 @@ export type WeatherReport = {
   visibility: number;
 }
 
-export const getCurrentWeather = async (city: City) => {
+export const getCurrentWeather = async (latitude: number, longitude: number) => {
   return axios.get<WeatherReport>('https://api.openweathermap.org/data/2.5/weather', {
     params: {
-      lat: city.latitude,
-      lon: city.longitude,
+      lat: latitude,
+      lon: longitude,
       units: 'metric',
       appid: import.meta.env.VITE_WEATHER_API_KEY
     }
