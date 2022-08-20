@@ -38,14 +38,17 @@ export const getCurrentWeather = async (city: City) => {
 
 type TimeWeatherReport = WeatherReport & { dt: number };
 
-type WeatherForecast = {
+export type WeatherForecast = {
   list: TimeWeatherReport[];
-  timezone: number;
-  sunrise: number;
-  sunset: number;
+  city: {
+    timezone: number;
+    sunrise: number;
+    sunset: number;
+  }
 }
 
-const getHourForecast = (forecast: WeatherForecast) => {
+export const getHourForecast = (forecast: WeatherForecast) => {
+  console.log(forecast)
   return forecast.list.slice(0, 8).map(({dt, main, weather}) => {
     return {
       dt,
