@@ -65,6 +65,6 @@
 
 <style>
   .suggestion {
-    @apply absolute top-full bg-opacity-50 mt-0.5 rounded-md w-full backdrop-blur-sm z-10;
+    @apply absolute top-full bg-opacity-50 mt-0.5 rounded-md w-full backdrop-blur-md z-10;
   }
 </style>
