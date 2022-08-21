@@ -1,8 +1,11 @@
 import axios from "axios";
 
-const RAPID_API_KEY = import.meta.env.VITE_RAPID_API_KEY;
 const geoApi = axios.create({
-  baseURL: 'http://geodb-free-service.wirefreethought.com/v1/geo/'
+  baseURL: 'https://wft-geo-db.p.rapidapi.com/v1/geo/',
+  headers: {
+    'X-RapidAPI-Host': 'wft-geo-db.p.rapidapi.com',
+    'X-RapidAPI-Key': import.meta.env.VITE_RAPID_API_KEY
+  }
 })
 
 export type City = {
