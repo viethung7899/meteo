@@ -1,6 +1,6 @@
 <script lang="ts">
   import { isDark } from '@stores/setting';
-import NavigationButton from './NavigationButton.svelte';
+  import NavigationButton from './NavigationButton.svelte';
   import Suggestion from './Suggestion.svelte';
 
   $: ringColor = $isDark ? 'ring-white' : 'ring-black';
