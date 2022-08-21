@@ -14,19 +14,11 @@
   // Focus state
   let focus = false;
 
-  // Click outside
-  let container: HTMLFormElement;
-  const clickOutside = (event) => {
-    if (!container.contains(event.target)) focus = false;
-  };
 </script>
-
-<svelte:window on:click={clickOutside} />
 
 <div class="flex items-center">
   <form
     class="relative flex flex-1 items-center opacity-60 focus-within:opacity-100"
-    bind:this={container}
   >
     <i class="fa-solid fa-magnifying-glass absolute pl-3 w-5 h-5" />
     <input
@@ -36,9 +28,8 @@
       autocomplete="off"
       aria-label="Search city"
       bind:value
-      on:focus={() => {
-        focus = true;
-      }}
+      on:focus={() => (focus = true)}
+      on:blur={() => (focus = false)}
     />
     <!-- Search suggestion -->
     <Suggestion query={value} bind:focus />

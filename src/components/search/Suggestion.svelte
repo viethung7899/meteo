@@ -39,7 +39,7 @@
           {#each cities as c}
             <div
               class="px-4 py-2 {hoverBg} hover:bg-opacity-10 cursor-pointer"
-              on:click={() => {
+              on:mousedown={() => {
                 city.set(c);
                 focus = false;
               }}
