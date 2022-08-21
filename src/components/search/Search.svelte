@@ -1,5 +1,6 @@
 <script lang="ts">
   import { isDark } from '@stores/setting';
+import NavigationButton from './NavigationButton.svelte';
   import Suggestion from './Suggestion.svelte';
 
   $: ringColor = $isDark ? 'ring-white' : 'ring-black';
@@ -42,9 +43,5 @@
     <!-- Search suggestion -->
     <Suggestion query={value} bind:focus />
   </form>
-  <button
-    class="ml-2 p-2 flex items-center justify-center hover:bg-black hover:bg-opacity-20 rounded-full"
-  >
-    <i class="fa-solid fa-location-arrow h-8 w-8" />
-  </button>
+  <NavigationButton />
 </div>

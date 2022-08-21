@@ -1,6 +1,9 @@
 import axios from "axios";
 
 const RAPID_API_KEY = import.meta.env.VITE_RAPID_API_KEY;
+const geoApi = axios.create({
+  baseURL: 'http://geodb-free-service.wirefreethought.com/v1/geo/'
+})
 
 export type City = {
   latitude: number;
@@ -27,14 +30,10 @@ const fakeCities: City[] = [
   }
 ]
 
-export const findCities = async (query: string, limit = 5) => {
+export const findCities = (query: string, limit = 5) => {
   const trim = query.trim();
   if (trim.length <= 0) return null;
-  return await axios.get<{ data: City[] }>('https://wft-geo-db.p.rapidapi.com/v1/geo/cities', {
-    headers: {
-      'X-RapidAPI-Key': RAPID_API_KEY,
-      'X-RapidAPI-Host': 'wft-geo-db.p.rapidapi.com'
-    },
+  return geoApi.get<{ data: City[] }>('cities', {
     params: {
       limit,
       namePrefix: trim,
@@ -48,4 +47,14 @@ export const getFakeCities = async (query: string, limit = 5) => {
   if (query.trim().length === 0) return undefined;
   await new Promise(r => setTimeout(r, 500));
   return fakeCities;
+}
+
+export const getNearestCityByGeoLocation = (latitude: number, longitude: number) => {
+  const slug = `${latitude.toFixed(4)}${longitude >= 0 ? "+" : ""}${longitude.toFixed(4)}`;
+  return geoApi.get<{data: City[]}>(`locations/${slug}/nearbyCities`, {
+    params: {
+      limit: 1,
+      radius: 100
+    }
+  }).then(response => response.data.data[0]);
 }
