@@ -9,10 +9,11 @@
   <span class="text-4xl font-bold">Meteo</span>
   <div class="flex items-center space-x-2">
     <UnitControl />
-    <button
+    <a
+      href="https://github.com/viethung7899/meteo"
       class="p-2 flex justify-center h-full hover:{$region} hover:bg-opacity-20 rounded-md"
     >
       <i class="fa-brands fa-github h-6 aspect-square" />
-    </button>
+    </a>
   </div>
 </nav>
